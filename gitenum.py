@@ -22,8 +22,8 @@ if args.user:
     for repo in r:
         json_list = json.loads(requests.get(repo['commits_url'][:-6]).text)
         for commit in json_list:
-            #TODO: Implement rate limit handling
-            print(commit)
+            #TODO: Implement rate limit error handling
+
             print(commit['commit']['author']['name'])
             print(commit['commit']['author']['email'])
 
