@@ -3,14 +3,14 @@
 import requests
 import argparse
 import json
+import time
 
 msg = "A quick and dirty enumeration script for pulling GitHub users' past emails through their previous commits."
 parser = argparse.ArgumentParser()
 parser.add_argument('-u', '--user', help = "User to enumerate")
 args = parser.parse_args()
 
-name_db = set()
-email_db = set()
+alias_db = set()
 
 if args.user:
 
@@ -22,10 +22,8 @@ if args.user:
     for repo in r:
         json_list = json.loads(requests.get(repo['commits_url'][:-6]).text)
         for commit in json_list:
-            #TODO: Implement rate limit error handling
+		#TODO: Implement rate limit error handling
+            	alias_db.add(f"{commit['commit']['author']['name']} - {commit['commit']['author']['email']}")
+	    	#print(commit['url'])
 
-            print(commit['commit']['author']['name'])
-            print(commit['commit']['author']['email'])
-
-    print(name_db)
-    print(email_db)
+    print(alias_db)
