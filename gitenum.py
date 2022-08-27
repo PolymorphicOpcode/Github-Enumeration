@@ -25,5 +25,5 @@ if args.user:
 		#TODO: Implement rate limit error handling
             	alias_db.add(f"{commit['commit']['author']['name']} - {commit['commit']['author']['email']}")
 	    	#print(commit['url'])
-
-    print(alias_db)
+    for i in alias_db:
+        print(i)
